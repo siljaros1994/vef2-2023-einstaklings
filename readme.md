@@ -1,5 +1,7 @@
 # Vefforritun 2, 2023, einstaklingsverkefni
 
+[Kynning í fyrirlestri](https://youtu.be/Ojdkr6W5n6M).
+
 ## Lýsing
 
 Verkefnið er tvíþætt:
