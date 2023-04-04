@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../css/styles.css';
 
 const SearchBar = ({ onWeatherData }) => {
   const [location, setLocation] = useState('');
