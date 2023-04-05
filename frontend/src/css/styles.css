@@ -1,6 +1,70 @@
-body {
-    background-color: #f2f2f2;
-  }
+.container-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card {
+  width: 50%;
+  background-color: lightgray;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 20px;
+  text-align: center;
+}
+
+.search-bar-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  width: 400px;
+}
+
+.search-bar-container input {
+  width: 70%;
+  max-width: 400px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.search-bar {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  font-size: 18px;
+  padding: 5px 10px;
+  width: 100%;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.form-select {
+  width: 300px;
+  padding: 5px 30px 5px 10px;
+  font-size: 16px;
+  line-height: 1.5;
+  border-radius: 5px;
+  border-color: #ced4da;
+}
+
+.form-select option {
+  background-color: #fff;
+  color: #212529;
+}
+
+.english-search-bar {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.icelandic-search-bar {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.form-control {
+  max-width: 500px;
+}
   
   .form-inline {
     width: 50%;
@@ -9,10 +73,6 @@ body {
   
   input[type="text"] {
     width: 70%;
-  }
-  
-  button[type="submit"] {
-    width: 30%;
   }
   
   .mt-4 {
