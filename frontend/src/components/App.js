@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import WeatherInfo from './WeatherInfo';
-import SearchBar from './SearchBar';
+import AddLocation from './AddLocation';
+import './App.css';
 
 const App = () => {
   const [weatherData, setWeatherData] = useState(null);
@@ -10,10 +11,16 @@ const App = () => {
   };
 
   return (
-    <div className="container">
-      <h1 className="text-center my-4">Veður- og hitastigsstöð</h1>
-      <SearchBar onWeatherData={handleWeatherData} />
-      {weatherData && <WeatherInfo data={weatherData} />}
+    <div id="app" className="app">
+      <div className="card">
+        <div className="card-header">
+          <h5 className="card-title">Veður- og hitastigsstöð</h5>
+        </div>
+        <div className="card-body">
+          <AddLocation onAddLocation={handleWeatherData} />
+          {weatherData && <WeatherInfo data={weatherData} />}
+        </div>
+      </div>
     </div>
   );
 };
