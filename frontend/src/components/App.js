@@ -36,19 +36,34 @@ const App = () => {
     const currentTime = new Date().getTime() / 1000; // Convert to UNIX timestamp
     const isDayTime = currentTime > sunrise && currentTime < sunset;
   
-    switch (weatherCondition) {
-      case 'Clear':
-        return getWeatherImageUrl('rz6nhff14au7jshx08i0');
-      case 'Clouds':
-        return getWeatherImageUrl('tyj2riqh5jnl7aio3jwl');
-      case 'Rain':
-        return getWeatherImageUrl('pbseiq176ywwrj3zd5cj');
-      case 'Snow':
-        return getWeatherImageUrl('acdcpllvsayvcptzg0rh');
-      default:
-        return isDayTime ? getWeatherImageUrl('favckal5glch3oztgzg8') : getWeatherImageUrl('p8qilopv0xvwdjdgtlyr');
+    if (isDayTime) {
+      switch (weatherCondition) {
+        case 'Clear':
+          return getWeatherImageUrl('k2d7bgxescboub8ywkpx');
+        case 'Clouds':
+          return getWeatherImageUrl('tyj2riqh5jnl7aio3jwl');
+        case 'Rain':
+          return getWeatherImageUrl('pbseiq176ywwrj3zd5cj');
+        case 'Snow':
+          return getWeatherImageUrl('acdcpllvsayvcptzg0rh');
+        default:
+          return getWeatherImageUrl('favckal5glch3oztgzg8');
+      }
+    } else {
+      switch (weatherCondition) {
+        case 'Clear':
+          return getWeatherImageUrl('k2d7bgxescboub8ywkpx');
+        case 'Clouds':
+          return getWeatherImageUrl('tyj2riqh5jnl7aio3jwl');
+        case 'Rain':
+          return getWeatherImageUrl('pbseiq176ywwrj3zd5cj');
+        case 'Snow':
+          return getWeatherImageUrl('acdcpllvsayvcptzg0rh');
+        default:
+          return getWeatherImageUrl('p8qilopv0xvwdjdgtlyr');
+      }
     }
-  };  
+  };
 
   return (
     <div id="app" className="app" style={{ backgroundImage: `url(${weatherGif})` }}>
