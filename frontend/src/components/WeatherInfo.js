@@ -23,21 +23,23 @@ const WeatherInfo = ({ data }) => {
       <p className="card-text">Hitastig: {data.main.temp}°C</p>
       <p className="card-text">Loftþrýstingur: {data.main.pressure} hPa</p>
       <p className="card-text">Vindastefna: {data.wind.deg}°</p>
-      <WeatherItem
-        icon={faWind}
-        title="Vindhraði"
-        value={`${data.wind.speed} m/s`}
-      />
-      <WeatherItem
-        icon={faTint}
-        title="Rakastig"
-        value={`${data.main.humidity}%`}
-      />
-      <WeatherItem
-        icon={faCloud}
-        title="Skýjahula"
-        value={`${data.clouds.all}%`}
-      />
+      <div className="weather-items"> {/* Ný lína */}
+        <WeatherItem
+          icon={faWind}
+          title="Vindhraði"
+          value={`${data.wind.speed} m/s`}
+        />
+        <WeatherItem
+          icon={faTint}
+          title="Rakastig"
+          value={`${data.main.humidity}%`}
+        />
+        <WeatherItem
+          icon={faCloud}
+          title="Skýjahula"
+          value={`${data.clouds.all}%`}
+        />
+      </div>
     </div>
   );
 };
