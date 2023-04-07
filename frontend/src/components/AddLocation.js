@@ -1,19 +1,15 @@
 import React, { useState } from 'react';
+import { fetchWeatherDataByLocation } from '../api';
 import '../css/styles.css';
 
 const AddLocation = ({ onAddLocation }) => {
   const [location, setLocation] = useState('');
   const [language, setLanguage] = useState('en');
 
-  const fetchWeatherData = async (location) => {
+  const handleAdd = async (e) => {
+    e.preventDefault();
     try {
-      const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=f5fec0946bc550184dec442698c35d67`
-      );
-      if (!response.ok) {
-        throw new Error('Failed to fetch weather data');
-      }
-      const data = await response.json();
+      const data = await fetchWeatherDataByLocation(location);
       onAddLocation(data);
     } catch (error) {
       console.error(error);
@@ -21,13 +17,8 @@ const AddLocation = ({ onAddLocation }) => {
     }
   };
 
-  const handleAdd = (e) => {
-    e.preventDefault();
-    fetchWeatherData(location);
-  };
-
   const placeholderText =
-    language === 'en' ? 'Enter location' : 'Sláðu inn staðsetningu';
+    language === 'en' ? 'Enter location' : 'Staðsetning';
 
   return (
     <form onSubmit={handleAdd} className="form-group">
@@ -47,7 +38,7 @@ const AddLocation = ({ onAddLocation }) => {
             onChange={(e) => setLanguage(e.target.value)}
         >
             <option value="en">English</option>
-            <option value="is">Icelandic</option>
+            <option value="is">Íslenska</option>
         </select>
       </div>
     </form>
