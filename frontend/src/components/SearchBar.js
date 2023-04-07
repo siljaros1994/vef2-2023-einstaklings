@@ -32,7 +32,7 @@ const SearchBar = ({ onWeatherData }) => {
           <input
             type="text"
             className="form-control"
-            placeholder="Sláðu inn staðsetningu"
+            placeholder="Staðsetning"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             onKeyPress={handleSearch}
