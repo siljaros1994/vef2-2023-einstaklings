@@ -1,8 +1,21 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
+const { getUsers } = require('./path/to/db.js');
+
+
 
 const API_KEY = "f5fec0946bc550184dec442698c35d67";
+const db = require('./lib/db');
+
+async function getUsers() {
+  const result = await db.query('SELECT * FROM users;');
+  return result.rows;
+}
+
+const users = await getUsers();
+console.log(users);
+
 
 router.get('/:location', async (req, res) => {
   const { location } = req.params;
