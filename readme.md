@@ -99,3 +99,13 @@ Skil skulu innihalda:
 | Útgáfa | Breyting      |
 | ------ | ------------- |
 | 0.1    | Fyrsta útgáfa |
+
+
+## keyrsla
+cd src/backend
+
+npm start
+
+cd frontend
+
+npm start
