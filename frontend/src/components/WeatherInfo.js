@@ -10,6 +10,11 @@ const WeatherItem = ({ icon, title, value }) => (
   </div>
 );
 
+const kelvinToCelsius = (kelvin) => {
+  return kelvin - 273.15;
+};
+
+
 const WeatherInfo = ({ data }) => {
   if (!data || !data.sys || !data.main || !data.wind || !data.clouds) {
     return <div className="weather-info">Loading weather data...</div>;
@@ -20,10 +25,10 @@ const WeatherInfo = ({ data }) => {
       <h5 className="card-title">
         Veður í {data.name}, {data.sys.country}
       </h5>
-      <p className="card-text">Hitastig: {data.main.temp}°C</p>
+      <p className="card-text">Hitastig: {kelvinToCelsius(data.main.temp).toFixed(2)}°C</p>
       <p className="card-text">Loftþrýstingur: {data.main.pressure} hPa</p>
       <p className="card-text">Vindastefna: {data.wind.deg}°</p>
-      <div className="weather-items"> {/* Ný lína */}
+      <div className="weather-items"> {}
         <WeatherItem
           icon={faWind}
           title="Vindhraði"
