@@ -1,6 +1,6 @@
-const express = require("express");
+import express from "express";
+import axios from "axios";
 const router = express.Router();
-const axios = require("axios");
 
 const API_KEY = "f5fec0946bc550184dec442698c35d67";
 
@@ -24,4 +24,4 @@ router.get('/lat/:lat/lon/:lon', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
