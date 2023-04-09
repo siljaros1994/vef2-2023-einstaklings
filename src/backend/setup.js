@@ -1,4 +1,4 @@
-import { createSchema, dropSchema, end } from '../lib/db.js';
+import { createSchema, dropSchema, end } from './lib/db.js';
  
 async function create() {
   const drop = await dropSchema();
