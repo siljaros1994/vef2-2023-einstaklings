@@ -2,22 +2,12 @@ import express from 'express';
 import cors from 'cors';
 import weatherRoutes from './routes/weather.js';
 import authRoutes from './auth/authRoutes.js';
-//import passport from './auth/passport.js';
-
-import {
-  requireAuthentication,
-  addUserIfAuthenticated,
-  requireAdmin,
-  tokenOptions,
-  jwtOptions,
-  passport
-} from './auth/passport.js';
+import passport from './auth/passport.js';
 
 const app = express();
-//const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3001;
 
 const {
-  PORT: port = 3001,
   SESSION_SECRET: sessionSecret,
   DATABASE_URL: connectionString
 } = process.env;
@@ -28,6 +18,8 @@ if (!connectionString || !sessionSecret) {
 }
 
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(cors());
 
 app.use(
   session({
@@ -45,6 +37,8 @@ app.use('/api/weather', weatherRoutes);
 app.use(express.urlencoded({ extended: true }));
 
 app.use(passport.initialize());
+app.use(passport.session());
+app.use('/api/weather', weatherRoutes);
 app.use('/auth', authRoutes);
 
 
