@@ -2,7 +2,7 @@
   "name": "vef2-2023-einstaklings",
   "version": "1.0.0",
   "type": "module",
-  "description": "Veður- og hitastigsstöð fyrir Vefforritun 2, 2023, einstaklingsverkefni",
+  "description": "Veður- og hitastig fyrir Vefforritun 2, 2023, einstaklingsverkefni",
   "main": "src/js/main.js",
   "scripts": {
     "start": "node src/backend/app.js",
