@@ -25,7 +25,7 @@ const SearchBar = ({ onWeatherData }) => {
   return (
     <div className="card">
       <div className="card-header">
-        <h5 className="card-title">Veður- og hitastigsstöð</h5>
+        <h5 className="card-title">Veður- og hitastigs</h5>
       </div>
       <div className="card-body">
         <div className="form-group">
