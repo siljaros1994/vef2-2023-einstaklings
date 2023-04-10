@@ -19,7 +19,7 @@ async function strat(data, next) {
   }
 }
 
-function requireAuthentication(req, res, next) {
+export function requireAuthentication(req, res, next) {
   return passport.authenticate('jwt', { session: false }, (err, user, info) => {
     if (err) {
       return next(err);
@@ -36,7 +36,7 @@ function requireAuthentication(req, res, next) {
   })(req, res, next);
 }
 
-function addUserIfAuthenticated(req, res, next) {
+export function addUserIfAuthenticated(req, res, next) {
   return passport.authenticate('jwt', { session: false }, (err, user) => {
     if (err) {
       return next(err);
@@ -50,7 +50,7 @@ function addUserIfAuthenticated(req, res, next) {
   })(req, res, next);
 }
 
-function requireAdmin(req, res, next) {
+export function requireAdmin(req, res, next) {
   return passport.authenticate('jwt', { session: false }, (err, user, info) => {
     if (err) {
       return next(err);
@@ -72,20 +72,13 @@ function requireAdmin(req, res, next) {
   })(req, res, next);
 }
 
-const tokenOptions = { expiresIn: parseInt(tokenLifetime, 10) };
+export const tokenOptions = { expiresIn: parseInt(tokenLifetime, 10) };
 
-const jwtOptions = {
+export const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: jwtSecret
 };
 
 passport.use(new Strategy(jwtOptions, strat));
 
-export {
-  requireAuthentication,
-  addUserIfAuthenticated,
-  requireAdmin,
-  tokenOptions,
-  jwtOptions,
-  passport
-};
+export default passport;
