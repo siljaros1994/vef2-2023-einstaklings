@@ -14,7 +14,7 @@ const SearchBar = ({ onWeatherData }) => {
       const API_URL = generateApiUrl(`/api/weather/${location}`);
 
       try {
-        const response = await fetch(API_URL);
+        const response = await fetch(API_URL, { credentials: 'include' });
         if (!response.ok) {
           setError("Staðsetningin finnst ekki");
           return;
