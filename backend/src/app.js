@@ -39,7 +39,12 @@ app.use(
   })
 );
 
-app.use(cors());
+app.use(
+  cors({
+    origin: 'http://localhost:3000', // change this to the domain of your frontend if it's different
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use('/api/weather', weatherRoutes);
 
