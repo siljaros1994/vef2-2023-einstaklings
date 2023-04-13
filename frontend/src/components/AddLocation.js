@@ -11,18 +11,26 @@ const AddLocation = ({ onAddLocation }) => {
     try {
       const url = generateApiUrl(`api/weather/${location}`);
       const response = await fetch(url);
-
+  
       if (!response.ok) {
         throw new Error('Failed to fetch weather data');
       }
-
+  
+      // Log response headers and content-type
+      console.log('Response headers:', response.headers);
+      console.log('Response content-type:', response.headers.get("content-type"));
+  
+      if (response.headers.get("content-type") !== "application/json") {
+        throw new Error("Response is not JSON");
+      }
+  
       const data = await response.json();
       onAddLocation(data);
     } catch (error) {
       console.error(error);
       alert('Failed to fetch weather data. Please try again.');
     }
-  };
+  };  
 
   const placeholderText =
     language === 'en' ? 'Enter location' : 'Staðsetning';
