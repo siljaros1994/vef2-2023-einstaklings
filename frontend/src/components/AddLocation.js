@@ -5,32 +5,30 @@ import '../css/styles.css';
 const AddLocation = ({ onAddLocation }) => {
   const [location, setLocation] = useState('');
   const [language, setLanguage] = useState('en');
+  const [error, setError] = useState(null);
 
-  const handleAdd = async (e) => {
-    e.preventDefault();
-    try {
-      const url = generateApiUrl(`api/weather/${location}`);
-      const response = await fetch(url);
-  
-      if (!response.ok) {
-        throw new Error('Failed to fetch weather data');
-      }
-  
-      // Log response headers and content-type
-      console.log('Response headers:', response.headers);
-      console.log('Response content-type:', response.headers.get("content-type"));
-  
-      if (response.headers.get("content-type") !== "application/json") {
-        throw new Error("Response is not JSON");
-      }
-  
-      const data = await response.json();
-      onAddLocation(data);
-    } catch (error) {
-      console.error(error);
-      alert('Failed to fetch weather data. Please try again.');
+
+  const handleAdd = async () => {
+    const API_URL = generateApiUrl(`/api/weather/${location}?lang=${language}`);
+
+    const response = await fetch(API_URL);
+    if (!response.ok) {
+      setError("Staðsetningin finnst ekki");
+      return;
     }
-  };  
+  
+    let data;
+    try {
+      data = await response.json();
+    } catch (error) {
+      console.error("Error: Response is not JSON");
+      console.error(await response.text());
+      setError("Villa kom upp við að sækja gögn");
+      return;
+    }
+  
+    onAddLocation(data);
+  };   
 
   const placeholderText =
     language === 'en' ? 'Enter location' : 'Staðsetning';
@@ -55,6 +53,7 @@ const AddLocation = ({ onAddLocation }) => {
             <option value="en">English</option>
             <option value="is">Íslenska</option>
         </select>
+        {error && <div className="error-message">{error}</div>}
       </div>
     </form>
   );
