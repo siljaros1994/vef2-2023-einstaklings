@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../css/styles.css';
+import generateApiUrl from '../../shared/generateApiUrl';
 
 const SearchBar = ({ onWeatherData }) => {
   const [location, setLocation] = useState('');
@@ -10,15 +11,21 @@ const SearchBar = ({ onWeatherData }) => {
       e.preventDefault();
       setError(null);
 
-      const API_KEY = "f5fec0946bc550184dec442698c35d67";
-      const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}&units=metric&lang=is`);
-      if (!response.ok) {
-        setError("Staðsetningin finnst ekki");
-        return;
+      const API_URL = generateApiUrl(`/api/weather/${location}`);
+
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) {
+          setError("Staðsetningin finnst ekki");
+          return;
+        }
+    
+        const data = await response.json();
+        onWeatherData(data);
+      } catch (error) {
+        console.error(error);
+        setError('Villa kom upp við að sækja gögn');
       }
-      const data = await response.json();
-  
-      onWeatherData(data);
     }
   };
 
