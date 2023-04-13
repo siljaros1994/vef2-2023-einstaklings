@@ -1,6 +1,6 @@
-//const API_KEY = 'f5fec0946bc550184dec442698c35d67';
+import { generateApiUrl } from './utils/generateApiUrl';
 
-const API_URL = "http://localhost:3001/api/weather";
+const API_URL = generateApiUrl("/api/weather");
 
 export const fetchWeatherDataByLocation = async (location) => {
   const response = await fetch(`${API_URL}/${location}`);
@@ -21,3 +21,4 @@ export const fetchWeatherDataByCoordinates = async (lat, lon) => {
 
   return await response.json();
 };
+
