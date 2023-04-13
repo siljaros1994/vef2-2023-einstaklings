@@ -102,7 +102,7 @@ Skil skulu innihalda:
 
 
 ## keyrsla
-cd src/backend
+cd backend
 
 npm start
 
