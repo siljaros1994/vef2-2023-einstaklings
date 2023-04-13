@@ -5,9 +5,13 @@ import weatherRoutes from './routes/weather.js';
 import authRoutes from './auth/authRoutes.js';
 import passport from './auth/passport.js';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url'; 
 
 const app = express();
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const port = process.env.PORT || 3001;
 
@@ -45,6 +49,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use('/api/weather', weatherRoutes);
 app.use('/auth', authRoutes);
+
+app.use(express.static(path.join(__dirname, '..', '..', 'frontend', 'build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', '..', 'frontend', 'build', 'index.html'));
+});
 
 
 app.listen(port, () => {
