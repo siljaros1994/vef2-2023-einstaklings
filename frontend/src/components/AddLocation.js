@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { fetchWeatherDataByLocation } from '../api';
+import { generateApiUrl } from '../utils/generateApiUrl';
 import '../css/styles.css';
 
 const AddLocation = ({ onAddLocation }) => {
@@ -9,7 +9,14 @@ const AddLocation = ({ onAddLocation }) => {
   const handleAdd = async (e) => {
     e.preventDefault();
     try {
-      const data = await fetchWeatherDataByLocation(location);
+      const url = generateApiUrl(`api/weather/${location}`);
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch weather data');
+      }
+
+      const data = await response.json();
       onAddLocation(data);
     } catch (error) {
       console.error(error);
