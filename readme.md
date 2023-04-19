@@ -98,6 +98,9 @@ Skil skulu innihalda:
 Stjórnandi með email: admin@example.com, lykilorð: password123
 Ekki stjórnandi með email: anna@example.com, lykkilorð: password456
 
+## API
+https://home.openweathermap.org/
+
 ## keyrsla
 createdb vef2-2023-EINSTAKLINGS
 
@@ -110,10 +113,6 @@ npm start
 cd frontend
 
 npm start
-
-
-
-createb
 
 > Útgáfa 0.1
 
