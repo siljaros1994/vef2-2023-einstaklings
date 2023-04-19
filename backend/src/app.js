@@ -8,7 +8,7 @@ import path from 'path';
 import { fileURLToPath } from 'url'; 
 import { ensureAuthenticated } from './middlewares/middleware.js';
 import apiRoutes from './routes/apiRoutes.js';
-import authRoutes from './routes/authRoutes.js';
+import authRoutes from './auth/authRoutes.js';
 import cors from './lib/cors.js';
 
 
