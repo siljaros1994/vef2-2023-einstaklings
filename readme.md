@@ -94,14 +94,15 @@ Skil skulu innihalda:
 
 ---
 
-> Útgáfa 0.1
-
-| Útgáfa | Breyting      |
-| ------ | ------------- |
-| 0.1    | Fyrsta útgáfa |
-
+## Notendur
+Stjórnandi með email: admin@example.com, lykilorð: password123
+Ekki stjórnandi með email: anna@example.com, lykkilorð: password456
 
 ## keyrsla
+createdb vef2-2023-EINSTAKLINGS
+
+npm run setup
+
 cd backend
 
 npm start
@@ -109,3 +110,13 @@ npm start
 cd frontend
 
 npm start
+
+
+
+createb
+
+> Útgáfa 0.1
+
+| Útgáfa | Breyting      |
+| ------ | ------------- |
+| 0.1    | Fyrsta útgáfa |
