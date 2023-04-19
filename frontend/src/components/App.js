@@ -5,12 +5,16 @@ import { fetchWeatherDataByCoordinates } from '../api';
 import Map from './Map';
 import SearchHistory from './SearchHistory';
 import { getWeatherImageUrl } from '../cloudinary';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Login from './Login';
+import Register from './Register';
 import './App.css';
 
 const App = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [searchHistory, setSearchHistory] = useState([]);
   const [weatherGif, setWeatherGif] = useState('');
+  const [loggedIn, setLoggedIn] = useState(false);
 
 
   const handleWeatherData = (data) => {
@@ -33,7 +37,7 @@ const App = () => {
   };  
 
   const getWeatherGifUrl = (weatherCondition, sunrise, sunset) => {
-    const currentTime = new Date().getTime() / 1000; // Convert to UNIX timestamp
+    const currentTime = new Date().getTime() / 1000;
     const isDayTime = currentTime > sunrise && currentTime < sunset;
   
     if (isDayTime) {
@@ -65,29 +69,50 @@ const App = () => {
     }
   };
 
-  return (
-    <div id="app" className="app" style={{ backgroundImage: `url(${weatherGif})` }}>
-      <div className="card">
-        <div className="card-header">
-          <h5 className="card-title">Veður- og hitastig</h5>
-        </div>
-        <div className="card-body">
-          <AddLocation onAddLocation={handleWeatherData} />
-          {weatherData && <WeatherInfo data={weatherData} />}
-          {weatherData && weatherData.coord && (
-            <div style={{ height: '400px', width: '80%', marginTop: '20px' }}>
-              <Map
-                position={[weatherData.coord.lat, weatherData.coord.lon]}
-                zoom={13}
-                onPositionChange={handlePositionChange}
-              />
-            </div>
-          )}
-          <SearchHistory history={searchHistory} />
+  const handleLogin = (success) => {
+    setLoggedIn(success);
+  };  
+
+  const renderAppContent = () => {
+    if (!loggedIn) {
+      return <Login onLogin={handleLogin} />;
+    }
+
+    return (
+      <div
+        id="app"
+        className="app"
+        style={{ backgroundImage: `url(${weatherGif})` }}
+      >
+        <div className="card">
+          <div className="card-header">
+            <h5 className="card-title">Veður- og hitastig</h5>
+          </div>
+          <div className="card-body">
+            <AddLocation onAddLocation={handleWeatherData} />
+            {weatherData && <WeatherInfo data={weatherData} />}
+            {weatherData && weatherData.coord && (
+              <div
+                style={{ height: "400px", width: "80%", marginTop: "20px" }}
+              >
+                <Map
+                  position={[
+                    weatherData.coord.lat,
+                    weatherData.coord.lon,
+                  ]}
+                  zoom={13}
+                  onPositionChange={handlePositionChange}
+                />
+              </div>
+            )}
+            <SearchHistory history={searchHistory} />
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
+
+  return <>{renderAppContent()}</>;
 };
 
 export default App;
