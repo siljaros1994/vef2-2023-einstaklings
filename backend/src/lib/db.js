@@ -1,5 +1,7 @@
 import pg from 'pg';
-import { readFileSync } from 'fs';
+//import { readFileAsync } from 'fs';
+import { readFile } from 'fs/promises';
+
 
 const SCHEMA_FILE = './sql/schema.sql';
 const DROP_SCHEMA_FILE = './sql/drop.sql';
@@ -43,7 +45,7 @@ export async function query(q, values = []) {
 
 export async function createSchema() {
   try {
-    const createSchemaSQL = readFileSync(SCHEMA_FILE, 'utf8');
+    const createSchemaSQL = await readFile(SCHEMA_FILE, 'utf8');
     const result = await query(createSchemaSQL);
     return result;
   } catch (e) {
@@ -54,7 +56,7 @@ export async function createSchema() {
 
 export async function dropSchema() {
   try {
-    const dropSchemaSQL = readFileSync(DROP_SCHEMA_FILE, 'utf8');
+    const dropSchemaSQL = await readFile(DROP_SCHEMA_FILE, 'utf8');
     const result = await query(dropSchemaSQL);
     return result;
   } catch (e) {
