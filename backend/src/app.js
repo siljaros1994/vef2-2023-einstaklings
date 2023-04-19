@@ -1,14 +1,19 @@
 import express from 'express';
-import cors from 'cors';
+//import cors from 'cors';
 import session from 'express-session';
 import weatherRoutes from './routes/weather.js';
-import authRoutes from './auth/authRoutes.js';
 import passport from './auth/passport.js';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url'; 
+import { ensureAuthenticated } from './middlewares/middleware.js';
+import apiRoutes from './routes/apiRoutes.js';
+import authRoutes from './routes/authRoutes.js';
+import cors from './lib/cors.js';
+
 
 const app = express();
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -28,33 +33,33 @@ if (!connectionString || !sessionSecret) {
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
+app.use(cors);
 
 app.use(
   session({
     secret: sessionSecret,
     resave: false,
     saveUninitialized: false,
-    maxAge: 20 * 1000 // 20 sek
+    maxAge: 20 * 1000
   })
 );
 
-app.use(
-  cors({
-    origin: 'http://localhost:3000', // change this to the domain of your frontend if it's different
-    credentials: true,
-  })
-);
+//app.use(
+  //cors({
+    //origin: 'http://localhost:3000',
+    //credentials: true,
+  //})
+//);
+
 app.use(express.json());
-app.use('/api/weather', weatherRoutes);
+app.use('/api/weather', ensureAuthenticated, weatherRoutes);
 
-app.use(express.urlencoded({ extended: true }));
+app.use('/api', apiRoutes);
+
+app.use('/auth', authRoutes);
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use('/api/weather', weatherRoutes);
-app.use('/auth', authRoutes);
-
 app.use(express.static(path.join(__dirname, '..', '..', 'frontend', 'build')));
 
 app.get('*', (req, res) => {
