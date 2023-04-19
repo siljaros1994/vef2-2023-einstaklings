@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "description": "Veður- og hitastig fyrir Vefforritun 2, 2023, einstaklingsverkefni",
-  "main": "src/index.js",
+  "main": "frontend/src/index.js",
   "scripts": {
     "start": "dotenv -e .env node backend/src/app.js",
     "dev": "dotenv -e .env nodemon backend/src/app.js",
